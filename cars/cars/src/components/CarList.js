@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {ScrollView} from 'react-native';
 import React, {Component} from 'react';
 import axios from 'axios';
 
@@ -25,7 +25,7 @@ class CarList extends Component {
   };
 
   render() {
-    return <View>{this.renderList()}</View>;
+    return <ScrollView>{this.renderList()}</ScrollView>;
   }
 }
 
