@@ -1,20 +1,31 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import CarDetail from './CarDetail';
+
 class CarList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      carList: [],
+    };
+  }
+
   componentDidMount() {
     axios.get('https://givecars.herokuapp.com/').then(response => {
-      console.log(response);
+      this.setState({carList: response.data});
     });
   }
 
+  renderList = () => {
+    return this.state.carList.map(brand => {
+      return <CarDetail brand={brand} key={brand.model[0].name} />;
+    });
+  };
+
   render() {
-    return (
-      <View>
-        <Text>Car List</Text>
-      </View>
-    );
+    return <View>{this.renderList()}</View>;
   }
 }
 
